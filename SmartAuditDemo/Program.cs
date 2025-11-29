@@ -1,7 +1,15 @@
+using SmartAuditDemo.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Register HttpClient for API calls
+builder.Services.AddHttpClient<ApiService>();
+
+// Register ApiService
+builder.Services.AddScoped<ApiService>();
 
 var app = builder.Build();
 

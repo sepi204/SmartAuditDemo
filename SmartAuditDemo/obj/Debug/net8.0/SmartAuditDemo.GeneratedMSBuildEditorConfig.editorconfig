@@ -68,6 +68,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52b2ljZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Organizations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JnYW5pemF0aW9uc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Organizations/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JnYW5pemF0aW9uc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Organizations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JnYW5pemF0aW9uc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Organizations/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JnYW5pemF0aW9uc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Organizations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JnYW5pemF0aW9uc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/sepeh/Desktop/Repos/SmartAudtDemo/SmartAuditDemo/Pages/Reconciliation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVjb25jaWxpYXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,54 @@
+@page
+@model SmartAuditDemo.Pages.Organizations.DeleteModel
+@{
+    ViewData["Title"] = "حذف شرکت";
+}
+
+<div class="page-header">
+    <h1 class="page-title">حذف شرکت</h1>
+    <p class="page-description">آیا از حذف این شرکت اطمینان دارید؟</p>
+</div>
+
+@if (Model.Organization == null)
+{
+    <div class="alert alert-danger">
+        شرکت یافت نشد.
+    </div>
+    <a asp-page="./Index" class="btn btn-secondary">بازگشت به لیست</a>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <strong>هشدار!</strong> این عمل قابل بازگشت نیست.
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3">نام شرکت:</dt>
+                <dd class="col-sm-9">@Model.Organization.Name</dd>
+
+                <dt class="col-sm-3">شناسه ملی:</dt>
+                <dd class="col-sm-9">@Model.Organization.NationalId</dd>
+
+                <dt class="col-sm-3">کد اقتصادی:</dt>
+                <dd class="col-sm-9">@Model.Organization.EconomicCode</dd>
+
+                <dt class="col-sm-3">نوع شرکت:</dt>
+                <dd class="col-sm-9">@Model.Organization.CompanyTypeName</dd>
+
+                <dt class="col-sm-3">زمینه فعالیت:</dt>
+                <dd class="col-sm-9">@Model.Organization.BusinessFieldName</dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                    <a asp-page="./Index" class="btn btn-secondary">انصراف</a>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+

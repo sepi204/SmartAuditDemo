@@ -1,0 +1,177 @@
+@page
+@model SmartAuditDemo.Pages.Organizations.IndexModel
+@{
+    ViewData["Title"] = "مدیریت شرکت‌ها و مشتریان";
+}
+
+<div class="page-header">
+    <h1 class="page-title">مدیریت شرکت‌ها و مشتریان</h1>
+    <p class="page-description">مدیریت اطلاعات شرکت‌ها و مشتریان</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">جستجو و فیلتر</h5>
+    </div>
+    <div class="card-body">
+        <form method="get" id="filterForm">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">نام شرکت</label>
+                    <input type="text" class="form-control" name="name" value="@Model.Filter.Name" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">کد اقتصادی</label>
+                    <input type="text" class="form-control" name="economicCode" value="@Model.Filter.EconomicCode" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">نوع شرکت</label>
+                    <select class="form-select" name="companyType">
+                        <option value="">همه</option>
+                        <option value="1" selected="@(Model.Filter.CompanyType == CompanyType.PrivateCompany)">شرکت خصوصی</option>
+                        <option value="2" selected="@(Model.Filter.CompanyType == CompanyType.PublicCompany)">شرکت سهامی عام</option>
+                        <option value="3" selected="@(Model.Filter.CompanyType == CompanyType.LimitedLiability)">شرکت با مسئولیت محدود</option>
+                        <option value="4" selected="@(Model.Filter.CompanyType == CompanyType.Cooperative)">شرکت تعاونی</option>
+                        <option value="5" selected="@(Model.Filter.CompanyType == CompanyType.Individual)">شخص حقیقی</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">وضعیت</label>
+                    <select class="form-select" name="isActive">
+                        <option value="">همه</option>
+                        <option value="true" selected="@(Model.Filter.IsActive == true)">فعال</option>
+                        <option value="false" selected="@(Model.Filter.IsActive == false)">غیرفعال</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">جستجو</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">لیست شرکت‌ها</h5>
+        <a asp-page="./Create" class="btn btn-success btn-sm">
+            <i class="me-1">➕</i> ایجاد جدید
+        </a>
+    </div>
+    <div class="card-body">
+        @if (Model.Organizations?.Data != null && Model.Organizations.Data.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>نام شرکت</th>
+                            <th>شناسه ملی</th>
+                            <th>کد اقتصادی</th>
+                            <th>نوع شرکت</th>
+                            <th>زمینه فعالیت</th>
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var org in Model.Organizations.Data)
+                        {
+                            <tr>
+                                <td>@org.Name</td>
+                                <td>@org.NationalId</td>
+                                <td>@org.EconomicCode</td>
+                                <td>@org.CompanyTypeName</td>
+                                <td>@org.BusinessFieldName</td>
+                                <td>
+                                    @if (org.IsActive)
+                                    {
+                                        <span class="badge bg-success">فعال</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">غیرفعال</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a asp-page="./Details" asp-route-id="@org.Id" class="btn btn-info" title="جزئیات">
+                                            <i>👁️</i>
+                                        </a>
+                                        <a asp-page="./Edit" asp-route-id="@org.Id" class="btn btn-warning" title="ویرایش">
+                                            <i>✏️</i>
+                                        </a>
+                                        <a asp-page="./Delete" asp-route-id="@org.Id" class="btn btn-danger" title="حذف">
+                                            <i>🗑️</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (Model.Organizations.TotalPages > 1)
+            {
+                <nav aria-label="صفحه‌بندی">
+                    <ul class="pagination justify-content-center">
+                        @if (Model.Organizations.HasPreviousPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageNumber=@(Model.Organizations.PageNumber - 1)&name=@Model.Filter.Name&economicCode=@Model.Filter.EconomicCode&companyType=@((int?)Model.Filter.CompanyType)&isActive=@Model.Filter.IsActive">قبلی</a>
+                            </li>
+                        }
+                        @for (int i = 1; i <= Model.Organizations.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.Organizations.PageNumber ? "active" : "")">
+                                <a class="page-link" href="?pageNumber=@i&name=@Model.Filter.Name&economicCode=@Model.Filter.EconomicCode&companyType=@((int?)Model.Filter.CompanyType)&isActive=@Model.Filter.IsActive">@i</a>
+                            </li>
+                        }
+                        @if (Model.Organizations.HasNextPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageNumber=@(Model.Organizations.PageNumber + 1)&name=@Model.Filter.Name&economicCode=@Model.Filter.EconomicCode&companyType=@((int?)Model.Filter.CompanyType)&isActive=@Model.Filter.IsActive">بعدی</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+        else
+        {
+            <div class="alert alert-info text-center">
+                <p class="mb-0">هیچ سازمانی یافت نشد.</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Toast notifications
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["SuccessMessage"]', 'success');
+            </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["ErrorMessage"]', 'error');
+            </text>
+        }
+
+        function showToast(message, type) {
+            // Simple toast implementation
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 start-50 translate-middle-x mt-3`;
+            toast.style.zIndex = '9999';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+}
+

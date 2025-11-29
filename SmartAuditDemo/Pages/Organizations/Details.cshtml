@@ -1,0 +1,72 @@
+@page
+@model SmartAuditDemo.Pages.Organizations.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات شرکت";
+}
+
+<div class="page-header">
+    <h1 class="page-title">جزئیات شرکت</h1>
+    <p class="page-description">مشاهده اطلاعات کامل شرکت</p>
+</div>
+
+@if (Model.Organization == null)
+{
+    <div class="alert alert-danger">
+        شرکت یافت نشد.
+    </div>
+    <a asp-page="./Index" class="btn btn-secondary">بازگشت به لیست</a>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">نام شرکت:</dt>
+                <dd class="col-sm-9">@Model.Organization.Name</dd>
+
+                <dt class="col-sm-3">شناسه ملی:</dt>
+                <dd class="col-sm-9">@Model.Organization.NationalId</dd>
+
+                <dt class="col-sm-3">شماره ثبت:</dt>
+                <dd class="col-sm-9">@Model.Organization.RegistrationNumber</dd>
+
+                <dt class="col-sm-3">کد اقتصادی:</dt>
+                <dd class="col-sm-9">@Model.Organization.EconomicCode</dd>
+
+                <dt class="col-sm-3">نوع شرکت:</dt>
+                <dd class="col-sm-9">@Model.Organization.CompanyTypeName</dd>
+
+                <dt class="col-sm-3">زمینه فعالیت:</dt>
+                <dd class="col-sm-9">@Model.Organization.BusinessFieldName</dd>
+
+                <dt class="col-sm-3">وضعیت:</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Organization.IsActive)
+                    {
+                        <span class="badge bg-success">فعال</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">غیرفعال</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">تاریخ ایجاد:</dt>
+                <dd class="col-sm-9">@Model.Organization.CreatedAt.ToString("yyyy/MM/dd HH:mm")</dd>
+
+                @if (Model.Organization.UpdatedAt.HasValue)
+                {
+                    <dt class="col-sm-3">تاریخ به‌روزرسانی:</dt>
+                    <dd class="col-sm-9">@Model.Organization.UpdatedAt.Value.ToString("yyyy/MM/dd HH:mm")</dd>
+                }
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a asp-page="./Edit" asp-route-id="@Model.Organization.Id" class="btn btn-warning">ویرایش</a>
+                <a asp-page="./Delete" asp-route-id="@Model.Organization.Id" class="btn btn-danger">حذف</a>
+                <a asp-page="./Index" class="btn btn-secondary">بازگشت به لیست</a>
+            </div>
+        </div>
+    </div>
+}
+

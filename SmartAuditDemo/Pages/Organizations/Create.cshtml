@@ -1,0 +1,91 @@
+@page
+@model SmartAuditDemo.Pages.Organizations.CreateModel
+@{
+    ViewData["Title"] = "ایجاد شرکت جدید";
+}
+
+<div class="page-header">
+    <h1 class="page-title">ایجاد شرکت جدید</h1>
+    <p class="page-description">اطلاعات شرکت جدید را وارد کنید</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Name" class="form-label">نام شرکت <span class="text-danger">*</span></label>
+                    <input asp-for="Input.Name" class="form-control" required />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.NationalId" class="form-label">شناسه ملی <span class="text-danger">*</span></label>
+                    <input asp-for="Input.NationalId" class="form-control" required maxlength="11" />
+                    <span asp-validation-for="Input.NationalId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.RegistrationNumber" class="form-label">شماره ثبت <span class="text-danger">*</span></label>
+                    <input asp-for="Input.RegistrationNumber" class="form-control" required />
+                    <span asp-validation-for="Input.RegistrationNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.EconomicCode" class="form-label">کد اقتصادی <span class="text-danger">*</span></label>
+                    <input asp-for="Input.EconomicCode" class="form-control" required maxlength="12" />
+                    <span asp-validation-for="Input.EconomicCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.CompanyType" class="form-label">نوع شرکت <span class="text-danger">*</span></label>
+                    <select asp-for="Input.CompanyType" class="form-select" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="1">شرکت خصوصی</option>
+                        <option value="2">شرکت سهامی عام</option>
+                        <option value="3">شرکت با مسئولیت محدود</option>
+                        <option value="4">شرکت تعاونی</option>
+                        <option value="5">شخص حقیقی</option>
+                    </select>
+                    <span asp-validation-for="Input.CompanyType" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.BusinessField" class="form-label">زمینه فعالیت <span class="text-danger">*</span></label>
+                    <select asp-for="Input.BusinessField" class="form-select" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="1">فناوری</option>
+                        <option value="2">ساخت و ساز</option>
+                        <option value="3">بازرگانی</option>
+                        <option value="4">تولیدی</option>
+                        <option value="5">خدماتی</option>
+                        <option value="6">مالی</option>
+                        <option value="7">کشاورزی</option>
+                    </select>
+                    <span asp-validation-for="Input.BusinessField" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="Input.IsActive" class="form-check-input" type="checkbox" />
+                <label asp-for="Input.IsActive" class="form-check-label">فعال</label>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">ذخیره</button>
+                <a asp-page="./Index" class="btn btn-secondary">انصراف</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

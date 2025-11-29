@@ -1,12 +1,83 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E8FDE5F4-18B1-48F8-97A1-880D268257C1}|..\\SmartAuditDemo.Application\\SmartAuditDemo.Application.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.application\\services\\organizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8CB58A5-374E-44A3-9BEE-9EC81E61A364}|..\\SmartAuditDemo.Infrastructure\\SmartAuditDemo.Infrastructure.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo\\pages\\organizations\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|solutionrelative:pages\\organizations\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo\\pages\\organizations\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|solutionrelative:pages\\organizations\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "..\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "..\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:03:15.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrganizationService.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
+              "RelativeDocumentMoniker": "..\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
+              "RelativeToolTip": "..\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:02:34.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Organizations\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Details.cshtml.cs",
+              "RelativeToolTip": "Pages\\Organizations\\Details.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:02:00.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Organizations\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Delete.cshtml.cs",
+              "RelativeToolTip": "Pages\\Organizations\\Delete.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAowBMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:01:59.567Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

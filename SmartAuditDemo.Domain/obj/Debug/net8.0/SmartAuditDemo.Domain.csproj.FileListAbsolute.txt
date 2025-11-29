@@ -1,0 +1,12 @@
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\bin\Debug\net8.0\SmartAuditDemo.Domain.deps.json
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\bin\Debug\net8.0\SmartAuditDemo.Domain.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\bin\Debug\net8.0\SmartAuditDemo.Domain.pdb
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.AssemblyInfoInputs.cache
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.AssemblyInfo.cs
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.csproj.CoreCompileInputs.cache
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.sourcelink.json
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\refint\SmartAuditDemo.Domain.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\SmartAuditDemo.Domain.pdb
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Domain\obj\Debug\net8.0\ref\SmartAuditDemo.Domain.dll
