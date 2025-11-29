@@ -1,0 +1,46 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "_AuthLayout";
+}
+
+<form method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Input.FullName" class="form-label">نام و نام خانوادگی</label>
+        <input asp-for="Input.FullName" class="form-control" required />
+        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Email" class="form-label">ایمیل</label>
+        <input asp-for="Input.Email" class="form-control" type="email" required />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Password" class="form-label">رمز عبور</label>
+        <input asp-for="Input.Password" class="form-control" type="password" required />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.ConfirmPassword" class="form-label">تکرار رمز عبور</label>
+        <input asp-for="Input.ConfirmPassword" class="form-control" type="password" required />
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <button type="submit" class="btn btn-primary w-100 mb-3">ثبت نام</button>
+
+    <div class="text-center">
+        <span class="text-muted">قبلاً ثبت نام کرده‌اید؟</span>
+        <a asp-page="./Login" class="text-decoration-none">وارد شوید</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

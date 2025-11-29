@@ -1,0 +1,45 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "ورود به سیستم";
+    Layout = "_AuthLayout";
+}
+
+<form method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Input.Email" class="form-label">ایمیل</label>
+        <input asp-for="Input.Email" class="form-control" type="email" required />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Password" class="form-label">رمز عبور</label>
+        <input asp-for="Input.Password" class="form-control" type="password" required />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="Input.RememberMe" class="form-check-input" type="checkbox" />
+        <label asp-for="Input.RememberMe" class="form-check-label">مرا به خاطر بسپار</label>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <button type="submit" class="btn btn-primary w-100 mb-3">ورود</button>
+
+    <div class="text-center">
+        <a asp-page="./ForgotPassword" class="text-decoration-none">رمز عبور را فراموش کرده‌اید؟</a>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="text-center">
+        <span class="text-muted">حساب کاربری ندارید؟</span>
+        <a asp-page="./Register" class="text-decoration-none">ثبت نام کنید</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
