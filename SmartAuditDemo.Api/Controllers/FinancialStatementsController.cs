@@ -37,6 +37,41 @@ public class FinancialStatementsController : ControllerBase
             return StatusCode(500, new { message = "خطا در تولید صورت مالی", error = ex.Message });
         }
     }
+
+    [HttpPost("upload")]
+    public async Task<IActionResult> GenerateFinancialStatementFromUpload([FromForm] IFormFile file)
+    {
+        try
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(new { message = "فایل الزامی است" });
+            }
+
+            // بررسی نوع فایل
+            var allowedExtensions = new[] { ".xlsx", ".xls" };
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                return BadRequest(new { message = "فقط فایل‌های Excel (.xlsx, .xls) مجاز هستند" });
+            }
+
+            using var fileStream = new MemoryStream();
+            await file.CopyToAsync(fileStream);
+            
+            var excelStream = await _financialStatementService.GenerateFinancialStatementFromFileAsync(fileStream);
+            
+            var fileName = $"صورت_مالی_{Path.GetFileNameWithoutExtension(file.FileName)}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            
+            return File(excelStream, 
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
+                fileName);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "خطا در تولید صورت مالی", error = ex.Message });
+        }
+    }
 }
 
 public class GenerateFinancialStatementRequest

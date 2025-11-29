@@ -391,6 +391,68 @@ public class ApiService
             return (false, "خطا در ارتباط با سرور", null, null);
         }
     }
+
+    // Upload and Generate Financial Statement
+    public async Task<(bool Success, string Message, byte[]? Data, string? FileName)> GenerateFinancialStatementFromUploadAsync(IFormFile file)
+    {
+        try
+        {
+            if (file == null || file.Length == 0)
+            {
+                return (false, "فایل الزامی است", null, null);
+            }
+
+            // بررسی نوع فایل
+            var allowedExtensions = new[] { ".xlsx", ".xls" };
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                return (false, "فقط فایل‌های Excel (.xlsx, .xls) مجاز هستند", null, null);
+            }
+
+            using var formData = new MultipartFormDataContent();
+            var fileContent = new StreamContent(file.OpenReadStream());
+            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+            formData.Add(fileContent, "file", file.FileName);
+
+            var response = await _httpClient.PostAsync("/api/financial-statements/upload", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                var fileName = response.Content.Headers.ContentDisposition?.FileName?.Trim('"')
+                    ?? $"صورت_مالی_{Path.GetFileNameWithoutExtension(file.FileName)}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+
+                return (true, "صورت مالی با موفقیت تولید شد", fileBytes, fileName);
+            }
+
+            var errorJson = await response.Content.ReadAsStringAsync();
+            string errorMessage = "خطا در تولید صورت مالی";
+
+            try
+            {
+                using var doc = JsonDocument.Parse(errorJson);
+                if (doc.RootElement.TryGetProperty("message", out var messageElement))
+                {
+                    errorMessage = messageElement.GetString() ?? errorMessage;
+                }
+            }
+            catch
+            {
+                if (!string.IsNullOrWhiteSpace(errorJson))
+                {
+                    errorMessage = errorJson;
+                }
+            }
+
+            return (false, errorMessage, null, null);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "خطا در آپلود و تولید صورت مالی");
+            return (false, "خطا در ارتباط با سرور", null, null);
+        }
+    }
 }
 
 

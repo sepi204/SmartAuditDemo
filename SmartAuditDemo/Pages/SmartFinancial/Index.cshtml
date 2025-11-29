@@ -147,10 +147,10 @@
 </div>
 
 <div class="form-card">
-    <form method="post" asp-page-handler="Generate" id="financialForm">
+    <form method="post" asp-page-handler="Generate" id="financialForm" enctype="multipart/form-data">
         <div class="mb-4">
-            <label class="form-label">انتخاب سند حسابداری</label>
-            <select class="form-select" name="documentId" id="documentSelect" required>
+            <label class="form-label">انتخاب سند حسابداری از لیست</label>
+            <select class="form-select" name="documentId" id="documentSelect">
                 <option value="">-- لطفاً یک سند را انتخاب کنید --</option>
                 @if (Model.Documents != null && Model.Documents.Any())
                 {
@@ -164,14 +164,20 @@
             </select>
             @if (Model.Documents == null || !Model.Documents.Any())
             {
-                <div class="alert alert-warning mt-3" role="alert">
-                    <i class="bi bi-exclamation-triangle"></i> هیچ سندی یافت نشد. لطفاً ابتدا اسناد را از بخش مدیریت اسناد اضافه کنید.
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="bi bi-info-circle"></i> هیچ سندی در سیستم وجود ندارد. می‌توانید فایل را مستقیماً آپلود کنید.
                 </div>
             }
         </div>
 
+        <div class="mb-4">
+            <label class="form-label">یا آپلود فایل جدید</label>
+            <input type="file" class="form-control" name="uploadedFile" id="uploadedFile" accept=".xlsx,.xls" />
+            <small class="form-text text-muted">فقط فایل‌های Excel (.xlsx, .xls) مجاز هستند</small>
+        </div>
+
         <div class="d-grid">
-            <button type="submit" class="btn btn-generate" id="generateBtn" @(Model.Documents == null || !Model.Documents.Any() ? "disabled" : "")>
+            <button type="submit" class="btn btn-generate" id="generateBtn">
                 <span class="loading-spinner spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                 <span class="btn-text">📊 محاسبه صورت مالی</span>
             </button>
@@ -237,13 +243,18 @@
         // Form submission handling
         document.getElementById('financialForm').addEventListener('submit', function(e) {
             const documentSelect = document.getElementById('documentSelect');
+            const uploadedFile = document.getElementById('uploadedFile');
             const generateBtn = document.getElementById('generateBtn');
             const btnText = generateBtn.querySelector('.btn-text');
             const spinner = generateBtn.querySelector('.loading-spinner');
             
-            if (!documentSelect.value) {
+            // بررسی اینکه آیا فایل آپلود شده یا سند انتخاب شده
+            const hasFile = uploadedFile.files && uploadedFile.files.length > 0;
+            const hasDocument = documentSelect.value && documentSelect.value !== '';
+            
+            if (!hasFile && !hasDocument) {
                 e.preventDefault();
-                showToast('لطفاً یک سند را انتخاب کنید', 'error');
+                showToast('لطفاً یک سند را انتخاب کنید یا فایلی را آپلود کنید', 'error');
                 return false;
             }
             

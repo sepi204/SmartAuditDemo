@@ -52,8 +52,46 @@ public class FinancialStatementService : IFinancialStatementService
 
         // باز کردن فایل Excel انتخاب شده
         using var inputWorkbook = new XLWorkbook(document.FilePath);
-        var inputWorksheet = inputWorkbook.Worksheets.First(); // استفاده از اولین worksheet
+        var inputWorksheet = inputWorkbook.Worksheets.First();
         
+        return await ProcessExcelAndGenerateOutput(inputWorksheet, operatingIncome, administrativeAndGeneralExpenses, 
+            personnelCosts, excessOfIncomeOverExpenditure, otherNonOperatingIncomeAndExpenses, 
+            excessOfIncomeOverExpensesBeforeTax, tax, netExcessOfIncomeOverExpenditure);
+    }
+
+    public async Task<MemoryStream> GenerateFinancialStatementFromFileAsync(Stream fileStream)
+    {
+        // Output data variables:
+        string operatingIncome = string.Empty;
+        string administrativeAndGeneralExpenses = string.Empty;
+        string personnelCosts = string.Empty;
+        string excessOfIncomeOverExpenditure = string.Empty;
+        string otherNonOperatingIncomeAndExpenses = string.Empty;
+        string excessOfIncomeOverExpensesBeforeTax = string.Empty;
+        string tax = string.Empty;
+        string netExcessOfIncomeOverExpenditure = string.Empty;
+
+        // باز کردن فایل Excel از Stream
+        fileStream.Position = 0; // Reset stream position
+        using var inputWorkbook = new XLWorkbook(fileStream);
+        var inputWorksheet = inputWorkbook.Worksheets.First();
+        
+        return await ProcessExcelAndGenerateOutput(inputWorksheet, operatingIncome, administrativeAndGeneralExpenses, 
+            personnelCosts, excessOfIncomeOverExpenditure, otherNonOperatingIncomeAndExpenses, 
+            excessOfIncomeOverExpensesBeforeTax, tax, netExcessOfIncomeOverExpenditure);
+    }
+
+    private async Task<MemoryStream> ProcessExcelAndGenerateOutput(
+        IXLWorksheet inputWorksheet,
+        string operatingIncome,
+        string administrativeAndGeneralExpenses,
+        string personnelCosts,
+        string excessOfIncomeOverExpenditure,
+        string otherNonOperatingIncomeAndExpenses,
+        string excessOfIncomeOverExpensesBeforeTax,
+        string tax,
+        string netExcessOfIncomeOverExpenditure)
+    {
         // خواندن Header row (ردیف اول)
         var headerRow = inputWorksheet.Row(1);
         var headerColumns = new Dictionary<int, string>();
@@ -128,8 +166,7 @@ public class FinancialStatementService : IFinancialStatementService
         netExcessOfIncomeOverExpenditure =
             (decimal.Parse(excessOfIncomeOverExpensesBeforeTax) - decimal.Parse(tax)).ToString();
 
-
-        // ایجاد فایل اکسل خروجی (همان قبلی)
+        // ایجاد فایل اکسل خروجی
         using var outputWorkbook = new XLWorkbook();
         var outputWorksheet = outputWorkbook.Worksheets.Add("سود و زیان");
         
