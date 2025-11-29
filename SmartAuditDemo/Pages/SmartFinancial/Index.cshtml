@@ -1,17 +1,256 @@
 @page
-@model IndexModel
+@model SmartAuditDemo.Pages.SmartFinancial.IndexModel
 @{
     ViewData["Title"] = "محاسبه صورت مالی هوشمند";
 }
 
-<div class="page-header">
-    <h1 class="page-title">محاسبه صورت مالی هوشمند</h1>
-    <p class="page-description">محاسبه و تحلیل صورت‌های مالی به صورت هوشمند</p>
+<style>
+    .financial-card {
+        background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%);
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(111, 66, 193, 0.3);
+        color: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .financial-card h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .financial-card p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .form-select, .form-control {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-select:focus, .form-control:focus {
+        border-color: #6f42c1;
+        box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+        outline: none;
+    }
+
+    .btn-generate {
+        background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(111, 66, 193, 0.4);
+        width: 100%;
+    }
+
+    .btn-generate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(111, 66, 193, 0.5);
+        color: white;
+    }
+
+    .btn-generate:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .document-list {
+        max-height: 300px;
+        overflow-y: auto;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 0.5rem;
+    }
+
+    .document-item {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e9ecef;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 5px;
+        margin-bottom: 0.25rem;
+    }
+
+    .document-item:hover {
+        background-color: #f8f9fa;
+        border-color: #6f42c1;
+    }
+
+    .document-item:last-child {
+        border-bottom: none;
+    }
+
+    .document-title {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .document-meta {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .loading-spinner {
+        display: none;
+    }
+
+    .loading-spinner.active {
+        display: inline-block;
+    }
+
+    @@media (max-width: 768px) {
+        .financial-card {
+            padding: 1.5rem;
+        }
+
+        .financial-card h1 {
+            font-size: 1.5rem;
+        }
+
+        .form-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<div class="financial-card">
+    <h1>🧮 محاسبه صورت مالی هوشمند</h1>
+    <p>محاسبه و تحلیل صورت‌های مالی به صورت هوشمند و خودکار</p>
 </div>
 
-<div class="placeholder-content">
-    <div>🧮</div>
-    <h3>صفحه محاسبه صورت مالی هوشمند</h3>
-    <p>محتوای این صفحه در آینده اضافه خواهد شد.</p>
+<div class="form-card">
+    <form method="post" asp-page-handler="Generate" id="financialForm">
+        <div class="mb-4">
+            <label class="form-label">انتخاب سند حسابداری</label>
+            <select class="form-select" name="documentId" id="documentSelect" required>
+                <option value="">-- لطفاً یک سند را انتخاب کنید --</option>
+                @if (Model.Documents != null && Model.Documents.Any())
+                {
+                    @foreach (var doc in Model.Documents)
+                    {
+                        <option value="@doc.Id">
+                            @doc.Title - @GetDocumentTypeName(doc.DocumentType) (@doc.CreatedAt.ToString("yyyy/MM/dd"))
+                        </option>
+                    }
+                }
+            </select>
+            @if (Model.Documents == null || !Model.Documents.Any())
+            {
+                <div class="alert alert-warning mt-3" role="alert">
+                    <i class="bi bi-exclamation-triangle"></i> هیچ سندی یافت نشد. لطفاً ابتدا اسناد را از بخش مدیریت اسناد اضافه کنید.
+                </div>
+            }
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-generate" id="generateBtn" @(Model.Documents == null || !Model.Documents.Any() ? "disabled" : "")>
+                <span class="loading-spinner spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span class="btn-text">📊 محاسبه صورت مالی</span>
+            </button>
+        </div>
+    </form>
 </div>
 
+@functions {
+    private string GetDocumentTypeName(SmartAuditDemo.Domain.Enums.DocumentType type)
+    {
+        return type switch
+        {
+            SmartAuditDemo.Domain.Enums.DocumentType.Voucher => "سند حسابداری",
+            SmartAuditDemo.Domain.Enums.DocumentType.Invoice => "فاکتور یا صورتحساب",
+            SmartAuditDemo.Domain.Enums.DocumentType.Contract => "قرارداد",
+            SmartAuditDemo.Domain.Enums.DocumentType.Letter => "مکاتبات",
+            SmartAuditDemo.Domain.Enums.DocumentType.Report => "گزارشات",
+            SmartAuditDemo.Domain.Enums.DocumentType.Ledger => "دفاتر",
+            SmartAuditDemo.Domain.Enums.DocumentType.Other => "سایر",
+            _ => type.ToString()
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        // Toast notifications
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["SuccessMessage"]', 'success');
+            </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["ErrorMessage"]', 'error');
+            </text>
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 start-50 translate-middle-x mt-3`;
+            toast.style.zIndex = '9999';
+            toast.style.minWidth = '300px';
+            toast.style.textAlign = 'center';
+            toast.innerHTML = `
+                <div class="d-flex align-items-center justify-content-center">
+                    <strong>${message}</strong>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            // Fade in animation
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+            }, 2500);
+            
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Form submission handling
+        document.getElementById('financialForm').addEventListener('submit', function(e) {
+            const documentSelect = document.getElementById('documentSelect');
+            const generateBtn = document.getElementById('generateBtn');
+            const btnText = generateBtn.querySelector('.btn-text');
+            const spinner = generateBtn.querySelector('.loading-spinner');
+            
+            if (!documentSelect.value) {
+                e.preventDefault();
+                showToast('لطفاً یک سند را انتخاب کنید', 'error');
+                return false;
+            }
+            
+            // Show loading state
+            generateBtn.disabled = true;
+            spinner.classList.add('active');
+            btnText.textContent = 'در حال محاسبه...';
+        });
+    </script>
+}

@@ -3,6 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo\\smartauditdemo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0F58F773-37F5-40BC-9B0D-D63C62B2D039}|SmartAuditDemo.csproj|solutionrelative:smartauditdemo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8FDE5F4-18B1-48F8-97A1-880D268257C1}|..\\SmartAuditDemo.Application\\SmartAuditDemo.Application.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.application\\services\\accountingdocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8FDE5F4-18B1-48F8-97A1-880D268257C1}|..\\SmartAuditDemo.Application\\SmartAuditDemo.Application.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.application\\dtos\\updateaccountingdocumentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8FDE5F4-18B1-48F8-97A1-880D268257C1}|..\\SmartAuditDemo.Application\\SmartAuditDemo.Application.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.application\\dtos\\createaccountingdocumentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E8FDE5F4-18B1-48F8-97A1-880D268257C1}|..\\SmartAuditDemo.Application\\SmartAuditDemo.Application.csproj|c:\\users\\sepeh\\desktop\\repos\\smartaudtdemo\\smartauditdemo.application\\services\\organizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -24,11 +37,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SmartAuditDemo",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\SmartAuditDemo.csproj",
+              "RelativeDocumentMoniker": "SmartAuditDemo.csproj",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\SmartAuditDemo.csproj",
+              "RelativeToolTip": "SmartAuditDemo.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-29T15:06:21.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UpdateAccountingDocumentDto.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\DTOs\\UpdateAccountingDocumentDto.cs",
+              "RelativeDocumentMoniker": "..\\SmartAuditDemo.Application\\DTOs\\UpdateAccountingDocumentDto.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\DTOs\\UpdateAccountingDocumentDto.cs",
+              "RelativeToolTip": "..\\SmartAuditDemo.Application\\DTOs\\UpdateAccountingDocumentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:14:19.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AccountingDocumentService.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\AccountingDocumentService.cs",
+              "RelativeDocumentMoniker": "..\\SmartAuditDemo.Application\\Services\\AccountingDocumentService.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\AccountingDocumentService.cs",
+              "RelativeToolTip": "..\\SmartAuditDemo.Application\\Services\\AccountingDocumentService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:14:17.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CreateAccountingDocumentDto.cs",
+              "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\DTOs\\CreateAccountingDocumentDto.cs",
+              "RelativeDocumentMoniker": "..\\SmartAuditDemo.Application\\DTOs\\CreateAccountingDocumentDto.cs",
+              "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\DTOs\\CreateAccountingDocumentDto.cs",
+              "RelativeToolTip": "..\\SmartAuditDemo.Application\\DTOs\\CreateAccountingDocumentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:13:59.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "..\\SmartAuditDemo.Infrastructure\\Data\\ApplicationDbContext.cs",
@@ -41,20 +106,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "OrganizationService.cs",
               "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
               "RelativeDocumentMoniker": "..\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
               "ToolTip": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
               "RelativeToolTip": "..\\SmartAuditDemo.Application\\Services\\OrganizationService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-29T13:02:34.752Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Details.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Details.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Organizations\\Details.cshtml.cs",
@@ -62,12 +127,11 @@
               "RelativeToolTip": "Pages\\Organizations\\Details.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:02:00.858Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T13:02:00.858Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Delete.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\sepeh\\Desktop\\Repos\\SmartAudtDemo\\SmartAuditDemo\\Pages\\Organizations\\Delete.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Organizations\\Delete.cshtml.cs",
@@ -75,8 +139,7 @@
               "RelativeToolTip": "Pages\\Organizations\\Delete.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAowBMAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:01:59.567Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T13:01:59.567Z"
             }
           ]
         }

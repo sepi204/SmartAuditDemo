@@ -1,5 +1,206 @@
 [
   {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.AccountingDocumentsController",
+    "Method": "GetDocuments",
+    "RelativePath": "api/AccountingDocuments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocumentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Extension",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartAuditDemo.Api.Common.ApiResponse\u00601[[SmartAuditDemo.Application.DTOs.PagedResultDto\u00601[[SmartAuditDemo.Application.DTOs.AccountingDocumentDto, SmartAuditDemo.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartAuditDemo.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.AccountingDocumentsController",
+    "Method": "CreateDocument",
+    "RelativePath": "api/AccountingDocuments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocumentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "UploaderUserId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartAuditDemo.Api.Common.ApiResponse\u00601[[SmartAuditDemo.Application.DTOs.AccountingDocumentDto, SmartAuditDemo.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.AccountingDocumentsController",
+    "Method": "GetDocument",
+    "RelativePath": "api/AccountingDocuments/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartAuditDemo.Api.Common.ApiResponse\u00601[[SmartAuditDemo.Application.DTOs.AccountingDocumentDto, SmartAuditDemo.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.AccountingDocumentsController",
+    "Method": "UpdateDocument",
+    "RelativePath": "api/AccountingDocuments/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocumentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartAuditDemo.Api.Common.ApiResponse\u00601[[SmartAuditDemo.Application.DTOs.AccountingDocumentDto, SmartAuditDemo.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.AccountingDocumentsController",
+    "Method": "DeleteDocument",
+    "RelativePath": "api/AccountingDocuments/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartAuditDemo.Api.Common.ApiResponse\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartAuditDemo.Api.Controllers.FinancialStatementsController",
+    "Method": "GenerateFinancialStatement",
+    "RelativePath": "api/FinancialStatements",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SmartAuditDemo.Api.Controllers.GenerateFinancialStatementRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartAuditDemo.Api.Controllers.OrganizationsController",
     "Method": "GetOrganizations",
     "RelativePath": "api/Organizations",

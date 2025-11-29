@@ -33,3 +33,5 @@ public class UpdateOrganizationDto
     public bool IsActive { get; set; }
 }
 
+
+

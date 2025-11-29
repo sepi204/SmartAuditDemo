@@ -11,3 +11,5 @@ public class PagedResultDto<T>
     public bool HasNextPage => PageNumber < TotalPages;
 }
 
+
+

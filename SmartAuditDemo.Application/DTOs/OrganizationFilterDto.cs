@@ -12,3 +12,5 @@ public class OrganizationFilterDto
     public int PageSize { get; set; } = 10;
 }
 
+
+

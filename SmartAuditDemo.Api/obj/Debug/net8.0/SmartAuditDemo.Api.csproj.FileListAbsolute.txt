@@ -147,4 +147,11 @@ C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\obj\Debug\net8.0\r
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\obj\Debug\net8.0\SmartAuditDemo.Api.pdb
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\obj\Debug\net8.0\SmartAuditDemo.Api.genruntimeconfig.cache
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\obj\Debug\net8.0\ref\SmartAuditDemo.Api.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\ClosedXML.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\ExcelNumberFormat.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\Irony.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\SixLabors.Fonts.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\System.IO.Packaging.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\bin\Debug\net8.0\XLParser.dll
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

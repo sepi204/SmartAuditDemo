@@ -11,3 +11,5 @@ public interface IOrganizationService
     Task<bool> DeleteAsync(Guid id);
 }
 
+
+

@@ -1,0 +1,64 @@
+@page
+@model SmartAuditDemo.Pages.Documents.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات سند";
+}
+
+<div class="page-header">
+    <h1 class="page-title">جزئیات سند</h1>
+    <p class="page-description">مشاهده اطلاعات کامل سند</p>
+</div>
+
+@if (Model.Document == null)
+{
+    <div class="alert alert-danger">
+        سند یافت نشد.
+    </div>
+    <a asp-page="./Index" class="btn btn-secondary">بازگشت به لیست</a>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">عنوان سند:</dt>
+                <dd class="col-sm-9">@Model.Document.Title</dd>
+
+                <dt class="col-sm-3">نوع سند:</dt>
+                <dd class="col-sm-9">@Model.Document.DocumentTypeName</dd>
+
+                <dt class="col-sm-3">اکستنشن:</dt>
+                <dd class="col-sm-9"><span class="badge bg-info">@Model.Document.Extension.ToUpper()</span></dd>
+
+                <dt class="col-sm-3">حجم:</dt>
+                <dd class="col-sm-9">@Model.Document.SizeFormatted</dd>
+
+                <dt class="col-sm-3">کاربر ثبت‌کننده:</dt>
+                <dd class="col-sm-9">@Model.Document.UploaderUserName</dd>
+
+                <dt class="col-sm-3">تاریخ ثبت:</dt>
+                <dd class="col-sm-9">@Model.Document.CreatedAt.ToString("yyyy/MM/dd HH:mm")</dd>
+
+                @if (Model.Document.UpdatedAt.HasValue)
+                {
+                    <dt class="col-sm-3">تاریخ به‌روزرسانی:</dt>
+                    <dd class="col-sm-9">@Model.Document.UpdatedAt.Value.ToString("yyyy/MM/dd HH:mm")</dd>
+                }
+
+                <dt class="col-sm-3">فایل:</dt>
+                <dd class="col-sm-9">
+                    <a href="@Model.Document.FileUrl" target="_blank" class="btn btn-primary btn-sm">
+                        <i class="me-1">⬇️</i> دانلود فایل
+                    </a>
+                </dd>
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a asp-page="./Edit" asp-route-id="@Model.Document.Id" class="btn btn-warning">ویرایش</a>
+                <a asp-page="./Delete" asp-route-id="@Model.Document.Id" class="btn btn-danger">حذف</a>
+                <a asp-page="./Index" class="btn btn-secondary">بازگشت به لیست</a>
+            </div>
+        </div>
+    </div>
+}
+

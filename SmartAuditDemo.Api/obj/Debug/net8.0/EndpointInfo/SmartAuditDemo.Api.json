@@ -5,6 +5,340 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/AccountingDocuments": {
+      "get": {
+        "tags": [
+          "AccountingDocuments"
+        ],
+        "parameters": [
+          {
+            "name": "Title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DocumentType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/DocumentType"
+            }
+          },
+          {
+            "name": "Extension",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoPagedResultDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoPagedResultDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoPagedResultDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AccountingDocuments"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DocumentType",
+                  "File",
+                  "Title"
+                ],
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "maxLength": 500,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DocumentType": {
+                    "$ref": "#/components/schemas/DocumentType"
+                  },
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "UploaderUserId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "Title": {
+                  "style": "form"
+                },
+                "DocumentType": {
+                  "style": "form"
+                },
+                "File": {
+                  "style": "form"
+                },
+                "UploaderUserId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AccountingDocuments/{id}": {
+      "get": {
+        "tags": [
+          "AccountingDocuments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AccountingDocuments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DocumentType",
+                  "Id",
+                  "Title"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Title": {
+                    "maxLength": 500,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DocumentType": {
+                    "$ref": "#/components/schemas/DocumentType"
+                  },
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "DocumentType": {
+                  "style": "form"
+                },
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountingDocumentDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AccountingDocuments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FinancialStatements": {
+      "post": {
+        "tags": [
+          "FinancialStatements"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateFinancialStatementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateFinancialStatementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateFinancialStatementRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Organizations": {
       "get": {
         "tags": [
@@ -303,6 +637,148 @@
   },
   "components": {
     "schemas": {
+      "AccountingDocumentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "documentTypeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploaderUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "uploaderUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sizeInKb": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sizeFormatted": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AccountingDocumentDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AccountingDocumentDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AccountingDocumentDtoPagedResultDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountingDocumentDto"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AccountingDocumentDtoPagedResultDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AccountingDocumentDtoPagedResultDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BooleanApiResponse": {
         "type": "object",
         "properties": {
@@ -389,6 +865,29 @@
           },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentType": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "GenerateFinancialStatementRequest": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false

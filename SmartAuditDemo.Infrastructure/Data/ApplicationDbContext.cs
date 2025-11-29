@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Organization> Organizations { get; set; }
+    public DbSet<AccountingDocument> AccountingDocuments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,5 @@
 @page
-@model IndexModel
+@model SmartAuditDemo.Pages.Documents.IndexModel
 @{
     ViewData["Title"] = "مدیریت اسناد";
 }
@@ -9,9 +9,213 @@
     <p class="page-description">مدیریت و سازماندهی اسناد حسابرسی</p>
 </div>
 
-<div class="placeholder-content">
-    <div>📄</div>
-    <h3>صفحه مدیریت اسناد</h3>
-    <p>محتوای این صفحه در آینده اضافه خواهد شد.</p>
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">جستجو و فیلتر</h5>
+    </div>
+    <div class="card-body">
+        <form method="get" id="filterForm">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">عنوان سند</label>
+                    <input type="text" class="form-control" name="title" value="@Model.Filter.Title" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">نوع سند</label>
+                    <select class="form-select" name="documentType">
+                        <option value="">همه</option>
+                        <option value="1" selected="@(Model.Filter.DocumentType == DocumentType.Voucher)">سند حسابداری</option>
+                        <option value="2" selected="@(Model.Filter.DocumentType == DocumentType.Invoice)">فاکتور یا صورتحساب</option>
+                        <option value="3" selected="@(Model.Filter.DocumentType == DocumentType.Contract)">قرارداد</option>
+                        <option value="4" selected="@(Model.Filter.DocumentType == DocumentType.Letter)">مکاتبات</option>
+                        <option value="5" selected="@(Model.Filter.DocumentType == DocumentType.Report)">گزارشات</option>
+                        <option value="6" selected="@(Model.Filter.DocumentType == DocumentType.Ledger)">دفاتر</option>
+                        <option value="7" selected="@(Model.Filter.DocumentType == DocumentType.Other)">سایر</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">اکستنشن</label>
+                    <input type="text" class="form-control" name="extension" value="@Model.Filter.Extension" placeholder="pdf, doc, xls" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100 me-2">جستجو</button>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <a href="/Documents" class="btn btn-secondary w-100">ریست</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">لیست اسناد</h5>
+        <a asp-page="./Create" class="btn btn-success btn-sm">
+            <i class="me-1">➕</i> ایجاد جدید
+        </a>
+    </div>
+    <div class="card-body">
+        @if (Model.DocumentsByType != null && Model.DocumentsByType.Any())
+        {
+            <div class="accordion" id="documentsAccordion">
+                @foreach (var group in Model.DocumentsByType)
+                {
+                    var accordionId = $"accordion-{group.Key}";
+                    var collapseId = $"collapse-{group.Key}";
+                    var documentTypeName = GetDocumentTypeName(group.Key);
+                    var icon = GetDocumentTypeIcon(group.Key);
+                    
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header" id="@accordionId">
+                            <button class="accordion-button @(group.Key == Model.DocumentsByType.First().Key ? "" : "collapsed")" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#@collapseId" 
+                                    aria-expanded="@(group.Key == Model.DocumentsByType.First().Key ? "true" : "false")">
+                                <span class="me-2">@icon</span>
+                                <strong>@documentTypeName</strong>
+                                <span class="badge bg-purple ms-2">@group.Value.Count</span>
+                            </button>
+                        </h2>
+                        <div id="@collapseId" class="accordion-collapse collapse @(group.Key == Model.DocumentsByType.First().Key ? "show" : "")" 
+                             data-bs-parent="#documentsAccordion">
+                            <div class="accordion-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>نام سند</th>
+                                                <th>اکستنشن</th>
+                                                <th>حجم</th>
+                                                <th>تاریخ ثبت</th>
+                                                <th>کاربر ثبت‌کننده</th>
+                                                <th>عملیات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var doc in group.Value)
+                                            {
+                                                <tr>
+                                                    <td>@doc.Title</td>
+                                                    <td><span class="badge bg-info">@doc.Extension.ToUpper()</span></td>
+                                                    <td>@doc.SizeFormatted</td>
+                                                    <td>@doc.CreatedAt.ToString("yyyy/MM/dd HH:mm")</td>
+                                                    <td>@doc.UploaderUserName</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm" role="group">
+                                                            <a asp-page="./Details" asp-route-id="@doc.Id" class="btn btn-info" title="مشاهده">
+                                                                <i>👁️</i>
+                                                            </a>
+                                                            <a href="@doc.FileUrl" target="_blank" class="btn btn-primary" title="دانلود">
+                                                                <i>⬇️</i>
+                                                            </a>
+                                                            <a asp-page="./Edit" asp-route-id="@doc.Id" class="btn btn-warning" title="ویرایش">
+                                                                <i>✏️</i>
+                                                            </a>
+                                                            <a asp-page="./Delete" asp-route-id="@doc.Id" class="btn btn-danger" title="حذف">
+                                                                <i>🗑️</i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (Model.Documents?.TotalPages > 1)
+            {
+                <nav aria-label="صفحه‌بندی" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @if (Model.Documents.HasPreviousPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageNumber=@(Model.Documents.PageNumber - 1)&title=@Model.Filter.Title&documentType=@((int?)Model.Filter.DocumentType)&extension=@Model.Filter.Extension">قبلی</a>
+                            </li>
+                        }
+                        @for (int i = 1; i <= Model.Documents.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.Documents.PageNumber ? "active" : "")">
+                                <a class="page-link" href="?pageNumber=@i&title=@Model.Filter.Title&documentType=@((int?)Model.Filter.DocumentType)&extension=@Model.Filter.Extension">@i</a>
+                            </li>
+                        }
+                        @if (Model.Documents.HasNextPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="?pageNumber=@(Model.Documents.PageNumber + 1)&title=@Model.Filter.Title&documentType=@((int?)Model.Filter.DocumentType)&extension=@Model.Filter.Extension">بعدی</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+        else
+        {
+            <div class="alert alert-info text-center">
+                <p class="mb-0">هیچ سندی یافت نشد.</p>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    private string GetDocumentTypeName(DocumentType type)
+    {
+        return type switch
+        {
+            DocumentType.Voucher => "سند حسابداری",
+            DocumentType.Invoice => "فاکتور یا صورتحساب",
+            DocumentType.Contract => "قرارداد",
+            DocumentType.Letter => "مکاتبات",
+            DocumentType.Report => "گزارشات",
+            DocumentType.Ledger => "دفاتر",
+            DocumentType.Other => "سایر",
+            _ => type.ToString()
+        };
+    }
+
+    private string GetDocumentTypeIcon(DocumentType type)
+    {
+        return type switch
+        {
+            DocumentType.Voucher => "📋",
+            DocumentType.Invoice => "🧾",
+            DocumentType.Contract => "📄",
+            DocumentType.Letter => "✉️",
+            DocumentType.Report => "📊",
+            DocumentType.Ledger => "📚",
+            DocumentType.Other => "📁",
+            _ => "📄"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["SuccessMessage"]', 'success');
+            </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+            showToast('@TempData["ErrorMessage"]', 'error');
+            </text>
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 start-50 translate-middle-x mt-3`;
+            toast.style.zIndex = '9999';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+}

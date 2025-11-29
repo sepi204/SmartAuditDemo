@@ -19,10 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Add AutoMapper
-builder.Services.AddAutoMapper(typeof(OrganizationMappingProfile));
+builder.Services.AddAutoMapper(typeof(OrganizationMappingProfile), typeof(AccountingDocumentMappingProfile));
 
 // Register Services
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IAccountingDocumentService, AccountingDocumentService>();
+builder.Services.AddScoped<IFinancialStatementService, FinancialStatementService>();
 
 // CORS
 builder.Services.AddCors(options =>

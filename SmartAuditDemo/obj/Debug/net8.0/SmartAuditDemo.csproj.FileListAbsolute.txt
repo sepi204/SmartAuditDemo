@@ -148,4 +148,11 @@ C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\Smart
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\SmartAuditDemo.Infrastructure.pdb
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\SmartAuditDemo.Domain.pdb
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\obj\Debug\net8.0\SmartAud.64A53AAD.Up2Date
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\ClosedXML.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\ExcelNumberFormat.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\Irony.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\SixLabors.Fonts.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\System.IO.Packaging.dll
+C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\bin\Debug\net8.0\XLParser.dll
 C:\Users\sepeh\Desktop\Repos\SmartAudtDemo\SmartAuditDemo\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
