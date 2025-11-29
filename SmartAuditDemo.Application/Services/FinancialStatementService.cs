@@ -16,6 +16,25 @@ public class FinancialStatementService : IFinancialStatementService
 
     public async Task<MemoryStream> GenerateFinancialStatementAsync(Guid documentId)
     {
+        // Output data variables:
+        //درآمد های عملیاتی
+        string operatingIncome = string.Empty;
+        //هزینه های اداری و عمومی
+        string administrativeAndGeneralExpenses = string.Empty;
+        //هزینه های پرسنلی
+        string personnelCosts = string.Empty;
+        //مازاد در آمد بر هزینه
+        string excessOfIncomeOverExpenditure = string.Empty;
+        //سایر درآمد ها و هزینه های غیر عملیاتی
+        string otherNonOperatingIncomeAndExpenses = string.Empty;
+        //مازاد درآمد و هزینه قبل از مالیات
+        string excessOfIncomeOverExpensesBeforeTax = string.Empty;
+        //مالیات
+        string tax = string.Empty;
+        //خالص مازاد درآمد بر هزینه
+        string netExcessOfIncomeOverExpenditure = string.Empty;
+
+
         // دریافت سند از دیتابیس
         var document = await _context.AccountingDocuments
             .FirstOrDefaultAsync(d => d.Id == documentId);
@@ -46,33 +65,73 @@ public class FinancialStatementService : IFinancialStatementService
             headerColumns[columnIndex] = columnTitle;
         }
 
-        // Iterate روی تمام ردیف‌ها (به جز Header که ردیف اول است)
         foreach (var row in inputWorksheet.RowsUsed().Skip(1))
         {
-            foreach (var cell in row.CellsUsed())
+            string kolKod = row.Cell(headerColumns.First(x => x.Value.Contains("کد کل")).Key).GetString();
+            string bedehkarStr = row.Cell(headerColumns.First(x => x.Value.Contains("بدهکار")).Key).GetString();
+            string bestankarStr = row.Cell(headerColumns.First(x => x.Value.Contains("بستانکار")).Key).GetString();
+
+            decimal bedehkar = string.IsNullOrWhiteSpace(bedehkarStr) ? 0 : decimal.Parse(bedehkarStr);
+            decimal bestankar = string.IsNullOrWhiteSpace(bestankarStr) ? 0 : decimal.Parse(bestankarStr);
+
+            // ----------------------------
+            // درآمدهای عملیاتی (کد کل 41)
+            // ----------------------------
+            if (kolKod.StartsWith("41"))
             {
-                // مقدار سلول
-                var cellValue = cell.Value;
-                
-                // عنوان ستون مربوطه از Header
-                var columnIndex = cell.Address.ColumnNumber;
+                operatingIncome += bestankar;
+            }
 
-                //HERE
+            // ----------------------------
+            // هزینه‌های اداری و عمومی (کد کل 61 → غیرپرسنلی)
+            // ----------------------------
+            if (kolKod.StartsWith("61"))
+            {
+                administrativeAndGeneralExpenses += bedehkar;
+            }
 
-                var relatedColumnTitle = headerColumns.ContainsKey(columnIndex) 
-                    ? headerColumns[columnIndex] 
-                    : string.Empty;
+            // ----------------------------
+            // هزینه‌های پرسنلی (اگر کد 51 یا 52 باشد)
+            // ----------------------------
+            if (kolKod.StartsWith("51") || kolKod.StartsWith("52"))
+            {
+                personnelCosts += bedehkar;
+            }
 
-                // در اینجا می‌توانید از cellValue و relatedColumnTitle استفاده کنید
-                // فعلاً هیچ تغییری اعمال نمی‌شود
-                _ = cellValue;
-                _ = relatedColumnTitle;
+            // ----------------------------
+            // سایر درآمدها و هزینه‌های غیرعملیاتی (کد کل 7)
+            // ----------------------------
+            if (kolKod.StartsWith("7"))
+            {
+                // اگر درآمد است، بستانکار؛ اگر هزینه است، بدهکار
+                otherNonOperatingIncomeAndExpenses += (bestankar - bedehkar);
+            }
+
+            // ----------------------------
+            // مالیات (مثلاً کد کل 34)
+            // ----------------------------
+            if (kolKod.StartsWith("34"))
+            {
+                tax += bedehkar;
             }
         }
 
+        // مازاد درآمد بر هزینه
+        excessOfIncomeOverExpenditure =
+            ((decimal.Parse(operatingIncome) - (decimal.Parse(administrativeAndGeneralExpenses) + decimal.Parse(personnelCosts)))).ToString();
+
+        // مازاد قبل از مالیات
+        excessOfIncomeOverExpensesBeforeTax =
+            excessOfIncomeOverExpenditure + otherNonOperatingIncomeAndExpenses;
+
+        // خالص مازاد درآمد بر هزینه
+        netExcessOfIncomeOverExpenditure =
+            (decimal.Parse(excessOfIncomeOverExpensesBeforeTax) - decimal.Parse(tax)).ToString();
+
+
         // ایجاد فایل اکسل خروجی (همان قبلی)
         using var outputWorkbook = new XLWorkbook();
-        var outputWorksheet = outputWorkbook.Worksheets.Add("صورت مالی");
+        var outputWorksheet = outputWorkbook.Worksheets.Add("سود و زیان");
         
         // تنظیم راست‌چین برای ستون‌ها
         outputWorksheet.Style.Font.FontName = "Tahoma";
@@ -88,29 +147,29 @@ public class FinancialStatementService : IFinancialStatementService
         outputWorksheet.Cell(3, 1).Value = "ردیف";
         outputWorksheet.Cell(3, 2).Value = "شرح";
         outputWorksheet.Cell(3, 3).Value = "مبلغ";
-        
-        // ستون‌های صورت مالی
-        var rows = new[]
+
+        // ستون‌های صورت مالی و مقادیر مربوطه
+        var financialItems = new[]
         {
-            "درآمدهای عملیاتی",
-            "هزینه‌های پرسنلی",
-            "هزینه‌های اداری و عمومی",
-            "مازاد (کسری) درآمد بر هزینه",
-            "سایر درآمدها و هزینه‌های غیر عملیاتی",
-            "مازاد درآمد و هزینه قبل از مالیات",
-            "مالیات",
-            "خالص مازاد درآمد بر هزینه"
+        new { Description = "درآمدهای عملیاتی", Value = operatingIncome },
+        new { Description = "هزینه‌های پرسنلی", Value = personnelCosts },
+        new { Description = "هزینه‌های اداری و عمومی", Value = administrativeAndGeneralExpenses },
+        new { Description = "مازاد (کسری) درآمد بر هزینه", Value = excessOfIncomeOverExpenditure },
+        new { Description = "سایر درآمدها و هزینه‌های غیر عملیاتی", Value = otherNonOperatingIncomeAndExpenses },
+        new { Description = "مازاد درآمد و هزینه قبل از مالیات", Value = excessOfIncomeOverExpensesBeforeTax },
+        new { Description = "مالیات", Value = tax },
+        new { Description = "خالص مازاد درآمد بر هزینه", Value = netExcessOfIncomeOverExpenditure }
         };
-        
+
         int rowIndex = 4;
-        for (int i = 0; i < rows.Length; i++)
+        for (int i = 0; i < financialItems.Length; i++)
         {
             outputWorksheet.Cell(rowIndex, 1).Value = i + 1;
-            outputWorksheet.Cell(rowIndex, 2).Value = rows[i];
-            outputWorksheet.Cell(rowIndex, 3).Value = ""; // خالی برای محاسبه بعدی
+            outputWorksheet.Cell(rowIndex, 2).Value = financialItems[i].Description;
+            outputWorksheet.Cell(rowIndex, 3).Value = financialItems[i].Value;
             rowIndex++;
         }
-        
+
         // تنظیم عرض ستون‌ها
         outputWorksheet.Column(1).Width = 10;
         outputWorksheet.Column(2).Width = 50;
